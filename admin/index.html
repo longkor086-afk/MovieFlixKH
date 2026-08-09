@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>MovieFlixKH Admin</title>
+<link rel="stylesheet" href="admin.css">
+<script src="admin.js" defer></script>
+</head>
+<body>
+<header class="admin-header">
+  <a class="brand" href="../index.html">🎬 MovieFlixKH <small>ADMIN</small></a>
+  <a href="../index.html">↗ មើល Website</a>
+</header>
+<main>
+<section class="heading">
+  <div><p class="eyebrow">CONTENT MANAGEMENT</p><h1>គ្រប់គ្រងភាពយន្ត</h1><p>បញ្ចូលព័ត៌មានរឿងខ្មែរ, Audio, Subtitle និង License។</p></div>
+  <button id="refreshButton" class="secondary" type="button">🔄 Refresh</button>
+</section>
+<div id="adminMessage" class="message" role="status" hidden></div>
+
+<section class="stats">
+  <div><span>🎬</span><b id="movieCount">0</b><small>ភាពយន្ត</small></div>
+  <div><span>🇰🇭</span><b id="khmerCount">0</b><small>មាន Khmer Audio</small></div>
+  <div><span>📜</span><b id="licensedCount">0</b><small>មាន License</small></div>
+</section>
+
+<section class="panel">
+<h2>➕ Add / Edit Movie</h2>
+<form id="movieForm">
+<div class="section"><h3>ព័ត៌មានទូទៅ</h3><div class="grid">
+<label>Movie ID<input id="movieId" placeholder="movie_123"></label>
+<label>Title (Original)<input id="title" required></label>
+<label>Title (Khmer)<input id="titleKh"></label>
+<label>Year<input id="year"></label>
+<label>Country<input id="country"></label>
+<label>Duration<input id="duration" placeholder="120 min"></label>
+<label>Quality<input id="quality" placeholder="1080P"></label>
+<label>Language<input id="language"></label>
+<label>Subtitle<input id="subtitle"></label>
+<label>Genre<input id="genre" placeholder="Action, Drama"></label>
+<label>Rating<input id="rating" type="number" min="0" max="10" step=".1"></label>
+</div></div>
+
+<div class="section"><h3>📝 Khmer Content</h3><div class="one">
+<label>Description (Original)<textarea id="description" rows="4"></textarea></label>
+<label>Description (Khmer)<textarea id="descriptionKh" rows="4"></textarea></label>
+</div></div>
+
+<div class="section"><h3>🎙️ Media</h3><div class="grid">
+<label>Video File ID<input id="videoFileId" placeholder="Telegram file_id"></label>
+<label>Khmer Audio<input id="khmerAudio" placeholder="Audio URL / File ID"></label>
+<label>Khmer Subtitle<input id="khmerSubtitle" placeholder="Subtitle URL / File ID"></label>
+<label>Poster URL<input id="poster" type="url"></label>
+<label>Backdrop URL<input id="backdrop" type="url"></label>
+</div></div>
+
+<div class="section"><h3>📜 Rights / License</h3><div class="grid">
+<label>License<select id="license">
+<option value="">មិនបានកំណត់</option>
+<option value="owned">Owned</option>
+<option value="licensed">Licensed</option>
+<option value="public-domain">Public Domain</option>
+<option value="creative-commons">Creative Commons</option>
+</select></label>
+<label>Source URL<input id="source" type="url"></label>
+</div><p class="warning">⚠️ ត្រូវប្រាកដថាអ្នកមានសិទ្ធិផ្សាយ និងរកចំណូលពីវីដេអូ មុន Publish ជាសាធារណៈ។</p></div>
+
+<div class="actions"><button id="resetButton" class="secondary" type="reset">សម្អាត</button><button class="primary" type="submit">💾 Save Movie</button></div>
+</form>
+</section>
+
+<section class="panel"><h2>🎬 Movies</h2><div id="movieList"></div></section>
+</main>
+</body>
+</html>
