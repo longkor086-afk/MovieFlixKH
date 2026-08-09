@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="MovieFlixKH - មើលភាពយន្ត និងវីដេអូអនឡាញ">
+<meta name="theme-color" content="#070707">
+<title>MovieFlixKH</title>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<header id="header">
+  <a class="logo" href="#home" aria-label="MovieFlixKH">🎬 Movie<span>Flix</span>KH</a>
+  <nav id="mainNavigation">
+    <a href="#home">Home</a><a href="#movies">Movies</a><a href="#genres">Genres</a><a href="#search">Search</a>
+  </nav>
+  <button id="menuToggle" aria-label="បើកម៉ឺនុយ" aria-expanded="false">☰</button>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <img id="heroBackdrop" alt="" aria-hidden="true">
+  <div class="heroShade"></div>
+  <div class="heroContent">
+    <b>🔥 Featured</b><h1 id="heroTitle">MovieFlixKH</h1>
+    <div id="heroMeta"></div><p id="heroDescription">ស្វាគមន៍មកកាន់ MovieFlixKH</p>
+    <button id="heroWatchButton" class="primary">▶️ មើលឥឡូវនេះ</button>
+    <button id="heroInfoButton" class="secondary">ℹ️ ព័ត៌មាន</button>
+  </div>
+</section>
+
+<section id="search" class="search">
+  <label class="sr-only" for="searchInput">ស្វែងរកភាពយន្ត</label>
+  <input id="searchInput" type="search" placeholder="ស្វែងរកភាពយន្ត..." autocomplete="off">
+  <button id="clearSearchButton" aria-label="លុបការស្វែងរក" hidden>✕</button>
+</section>
+
+<section id="movies" class="section">
+  <div class="heading"><h2>🎬 ភាពយន្ត</h2><button id="viewAllButton">មើលទាំងអស់ →</button></div>
+  <div id="categoryContainer" class="categories">
+    <button class="category active" data-category="all">ទាំងអស់</button>
+    <button class="category" data-category="action">Action</button>
+    <button class="category" data-category="drama">Drama</button>
+    <button class="category" data-category="comedy">Comedy</button>
+    <button class="category" data-category="romance">Romance</button>
+    <button class="category" data-category="horror">Horror</button>
+    <button class="category" data-category="animation">Animation</button>
+  </div>
+  <div id="loading" class="grid"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+  <div id="error" class="state" hidden><h3>⚠️ មិនអាចភ្ជាប់ទៅ Server បានទេ</h3><button id="retryButton" class="primary">🔄 ព្យាយាមម្តងទៀត</button></div>
+  <div id="emptyState" class="state" hidden><div>🎬</div><h3>មិនទាន់មានភាពយន្តទេ</h3><p id="emptyMessage"></p></div>
+  <div id="movieGrid" class="grid"></div>
+</section>
+
+<section id="genres" class="section">
+  <h2>🎭 ប្រភេទភាពយន្ត</h2>
+  <div id="genreGrid" class="genreGrid">
+    <button data-genre="Action">💥 Action</button><button data-genre="Drama">🎭 Drama</button>
+    <button data-genre="Comedy">😂 Comedy</button><button data-genre="Romance">❤️ Romance</button>
+    <button data-genre="Horror">👻 Horror</button><button data-genre="Animation">✨ Animation</button>
+  </div>
+</section>
+</main>
+
+<div id="playerModal" class="modal" hidden>
+  <div class="modalBox">
+    <div class="modalHead"><h2 id="playerMovieTitle">Movie</h2><button id="closePlayerButton">✕</button></div>
+    <video id="videoPlayer" controls playsinline preload="metadata"></video>
+    <div class="details">
+      <h2 id="detailsTitle">Movie</h2><p id="detailsDescription"></p>
+      <div id="detailsGrid"></div>
+      <button id="downloadButton" class="primary">📥 Download</button>
+      <button id="shareButton" class="secondary">🔗 Share</button>
+    </div>
+  </div>
+</div>
+
+<div id="infoModal" class="modal" hidden>
+  <div class="modalBox"><div class="modalHead"><h2 id="infoModalTitle">ព័ត៌មាន</h2><button id="closeInfoButton">✕</button></div><div id="infoModalBody" class="details"></div></div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+<footer>© <span id="currentYear"></span> MovieFlixKH</footer>
+</body>
+</html>
