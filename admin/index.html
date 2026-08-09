@@ -3,84 +3,75 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="MovieFlixKH - មើលភាពយន្ត និងវីដេអូអនឡាញ">
-<meta name="theme-color" content="#070707">
-<title>MovieFlixKH</title>
-<link rel="stylesheet" href="style.css">
-<script src="app.js" defer></script>
+<meta name="theme-color" content="#090909">
+<title>MovieFlixKH Admin</title>
+<link rel="stylesheet" href="admin.css">
+<script src="admin.js" defer></script>
 </head>
 <body>
-<header id="header">
-  <a class="logo" href="#home" aria-label="MovieFlixKH">🎬 Movie<span>Flix</span>KH</a>
-  <nav id="mainNavigation">
-    <a href="#home">Home</a><a href="#movies">Movies</a><a href="#genres">Genres</a><a href="#search">Search</a>
-  </nav>
-  <button id="menuToggle" aria-label="បើកម៉ឺនុយ" aria-expanded="false">☰</button>
+<header class="adminHeader">
+  <a href="../" class="logo" aria-label="MovieFlixKH">🎬 Movie<span>Flix</span>KH <small>ADMIN</small></a>
+  <button id="refreshButton" class="secondary" type="button">🔄 Refresh</button>
 </header>
 
-<main>
-<section id="home" class="hero">
-  <img id="heroBackdrop" alt="" aria-hidden="true">
-  <div class="heroShade"></div>
-  <div class="heroContent">
-    <b>🔥 Featured</b><h1 id="heroTitle">MovieFlixKH</h1>
-    <div id="heroMeta"></div><p id="heroDescription">ស្វាគមន៍មកកាន់ MovieFlixKH</p>
-    <button id="heroWatchButton" class="primary">▶️ មើលឥឡូវនេះ</button>
-    <button id="heroInfoButton" class="secondary">ℹ️ ព័ត៌មាន</button>
-  </div>
-</section>
+<main class="container">
+  <section class="stats">
+    <div><span>🎬 Movies</span><strong id="movieCount">0</strong></div>
+    <div><span>🇰🇭 Khmer Audio</span><strong id="khmerCount">0</strong></div>
+    <div><span>✅ Licensed</span><strong id="licensedCount">0</strong></div>
+  </section>
 
-<section id="search" class="search">
-  <label class="sr-only" for="searchInput">ស្វែងរកភាពយន្ត</label>
-  <input id="searchInput" type="search" placeholder="ស្វែងរកភាពយន្ត..." autocomplete="off">
-  <button id="clearSearchButton" aria-label="លុបការស្វែងរក" hidden>✕</button>
-</section>
+  <div id="adminMessage" class="message" hidden></div>
 
-<section id="movies" class="section">
-  <div class="heading"><h2>🎬 ភាពយន្ត</h2><button id="viewAllButton">មើលទាំងអស់ →</button></div>
-  <div id="categoryContainer" class="categories">
-    <button class="category active" data-category="all">ទាំងអស់</button>
-    <button class="category" data-category="action">Action</button>
-    <button class="category" data-category="drama">Drama</button>
-    <button class="category" data-category="comedy">Comedy</button>
-    <button class="category" data-category="romance">Romance</button>
-    <button class="category" data-category="horror">Horror</button>
-    <button class="category" data-category="animation">Animation</button>
-  </div>
-  <div id="loading" class="grid"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
-  <div id="error" class="state" hidden><h3>⚠️ មិនអាចភ្ជាប់ទៅ Server បានទេ</h3><button id="retryButton" class="primary">🔄 ព្យាយាមម្តងទៀត</button></div>
-  <div id="emptyState" class="state" hidden><div>🎬</div><h3>មិនទាន់មានភាពយន្តទេ</h3><p id="emptyMessage"></p></div>
-  <div id="movieGrid" class="grid"></div>
-</section>
-
-<section id="genres" class="section">
-  <h2>🎭 ប្រភេទភាពយន្ត</h2>
-  <div id="genreGrid" class="genreGrid">
-    <button data-genre="Action">💥 Action</button><button data-genre="Drama">🎭 Drama</button>
-    <button data-genre="Comedy">😂 Comedy</button><button data-genre="Romance">❤️ Romance</button>
-    <button data-genre="Horror">👻 Horror</button><button data-genre="Animation">✨ Animation</button>
-  </div>
-</section>
-</main>
-
-<div id="playerModal" class="modal" hidden>
-  <div class="modalBox">
-    <div class="modalHead"><h2 id="playerMovieTitle">Movie</h2><button id="closePlayerButton">✕</button></div>
-    <video id="videoPlayer" controls playsinline preload="metadata"></video>
-    <div class="details">
-      <h2 id="detailsTitle">Movie</h2><p id="detailsDescription"></p>
-      <div id="detailsGrid"></div>
-      <button id="downloadButton" class="primary">📥 Download</button>
-      <button id="shareButton" class="secondary">🔗 Share</button>
+  <section class="panel">
+    <div class="panelHead">
+      <div><small>CONTENT MANAGEMENT</small><h1>➕ Add Movie</h1></div>
+      <a href="../" class="secondary">🎬 View Website</a>
     </div>
-  </div>
-</div>
 
-<div id="infoModal" class="modal" hidden>
-  <div class="modalBox"><div class="modalHead"><h2 id="infoModalTitle">ព័ត៌មាន</h2><button id="closeInfoButton">✕</button></div><div id="infoModalBody" class="details"></div></div>
-</div>
+    <form id="movieForm" autocomplete="off">
+      <div class="formGrid">
+        <div class="field"><label for="movieId">Movie ID</label><input id="movieId" placeholder="movie_123"></div>
+        <div class="field required"><label for="title">Title *</label><input id="title" required placeholder="Movie title"></div>
+        <div class="field"><label for="titleKh">ចំណងជើងខ្មែរ</label><input id="titleKh" placeholder="ឈ្មោះភាពយន្តជាខ្មែរ"></div>
+        <div class="field"><label for="year">Year</label><input id="year" inputmode="numeric" placeholder="2026"></div>
+        <div class="field"><label for="country">Country</label><input id="country" placeholder="Korea, China, USA..."></div>
+        <div class="field"><label for="duration">Duration</label><input id="duration" placeholder="1h 45m"></div>
+        <div class="field"><label for="quality">Quality</label><input id="quality" value="1080P" placeholder="1080P"></div>
+        <div class="field"><label for="rating">Rating</label><input id="rating" type="number" min="0" max="10" step="0.1" placeholder="8.5"></div>
+        <div class="field"><label for="language">Language</label><input id="language" placeholder="Korean / Chinese / English"></div>
+        <div class="field"><label for="subtitle">Subtitle</label><input id="subtitle" placeholder="Khmer / English / None"></div>
+        <div class="field"><label for="genre">Genre</label><input id="genre" placeholder="Action, Drama, Romance"></div>
+        <div class="field"><label for="license">License</label>
+          <select id="license">
+            <option value="">Select license</option>
+            <option value="owned">Owned</option>
+            <option value="licensed">Licensed</option>
+            <option value="public-domain">Public Domain</option>
+            <option value="creative-commons">Creative Commons</option>
+          </select>
+        </div>
+        <div class="field full"><label for="poster">Poster URL</label><input id="poster" type="url" placeholder="https://..."></div>
+        <div class="field full"><label for="backdrop">Backdrop URL</label><input id="backdrop" type="url" placeholder="https://..."></div>
+        <div class="field full"><label for="videoFileId">Telegram Video File ID</label><input id="videoFileId" placeholder="BAACAg..."></div>
+        <div class="field"><label for="khmerAudio">Khmer Audio</label><input id="khmerAudio" placeholder="Yes / No / URL"></div>
+        <div class="field"><label for="khmerSubtitle">Khmer Subtitle</label><input id="khmerSubtitle" placeholder="Yes / No / URL"></div>
+        <div class="field full"><label for="source">Source</label><input id="source" placeholder="Source / rights information"></div>
+        <div class="field full"><label for="description">Description</label><textarea id="description" rows="4" placeholder="Movie description..."></textarea></div>
+        <div class="field full"><label for="descriptionKh">Description Khmer</label><textarea id="descriptionKh" rows="4" placeholder="ការពិពណ៌នាភាពយន្តជាខ្មែរ..."></textarea></div>
+      </div>
 
-<div id="toast" class="toast" hidden></div>
-<footer>© <span id="currentYear"></span> MovieFlixKH</footer>
+      <div class="formActions">
+        <button id="saveButton" class="primary" type="submit">💾 Save Movie</button>
+        <button id="resetButton" class="secondary" type="reset">↩️ Clear</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel">
+    <div class="panelHead"><div><small>LIBRARY</small><h2>🎞️ Movies</h2></div></div>
+    <div id="movieList" class="movieList"><p class="muted">កំពុងផ្ទុក...</p></div>
+  </section>
+</main>
 </body>
 </html>
